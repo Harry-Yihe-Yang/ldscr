@@ -3,7 +3,7 @@
     "path": "C:/Users/yxy1234/Downloads/ldscR-main/ldscR-main/R/ldscR.R",
     "project_path": "R/ldscR.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "4026495391",
     "contents": "",
     "dirty": false,
     "created": 1723137311494.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "238,0",
-        "scrollLine": "30"
+        "cursorPosition": "41,78",
+        "scrollLine": "27"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725903789,
+    "lastKnownWriteTime": 1725903981,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725903789862,
+    "last_content_update": 1725903981830,
     "read_only": false,
     "read_only_alternatives": []
 }

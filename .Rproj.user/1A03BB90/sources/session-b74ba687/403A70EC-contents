@@ -39,7 +39,7 @@
 #' @export
 #'
 #'
-ldscR=function(GWAS_List,LDSC,Boundary=F,zsquare_thresh=10000,cov_thresh=3000,estimate_SE=F,nblock=500,sampling.time=500,sampling.ratio=0.5){
+ldscR=function(GWAS_List,LDSC,Boundary=F,zsquare_thresh=50000,cov_thresh=10000,estimate_SE=F,nblock=500,sampling.time=500,sampling.ratio=0.5){
 
 ############################# Basic Information ###############################
 t0 = Sys.time()

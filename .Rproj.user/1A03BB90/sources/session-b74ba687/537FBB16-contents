@@ -29,7 +29,7 @@
 #'
 #' @export
 #'
-ldsc.bicov=function(gwas1,gwas2,h1,h2,LDSC,zsquare_thresh=10000,cov_thresh=3000,sampling.time=200,sampling.ratio=0.5){
+ldsc.bicov=function(gwas1,gwas2,h1,h2,LDSC,zsquare_thresh=50000,cov_thresh=10000,sampling.time=200,sampling.ratio=0.5){
 
 ############################# Basic Information ###############################
 
