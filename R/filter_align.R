@@ -25,20 +25,20 @@ if (allele_match == T){
 for (i in 1:p) {
 A <- gwas_data_list[[i]]
 A <- setDT(A)
+setkey(A,SNP)
 A <- allele_harmonise(ref_panel = ref_panel, gwas_data = A)
+A <- A[!duplicated(A$SNP), ]
 gwas_data_list[[i]] <- A
 }
 }else{
 A <- gwas_data_list[[i]]
 A <- setDT(A)
+setkey(A,SNP)
 A <- A[which(A$SNP%in%ref_panel$SNP),]
+A <- A[!duplicated(A$SNP), ]
 gwas_data_list[[i]] <- A
 }
 
-gwas_data_list <- lapply(gwas_data_list, function(df) {
-df <- df[!duplicated(df$SNP), ]
-return(df)
-})
 print("Finding common SNPs...")
 snp_sets <- lapply(gwas_data_list, function(df) {
 return(as.character(df$SNP))
