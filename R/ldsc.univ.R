@@ -39,7 +39,7 @@ if(Boundary[1]==F){
 Boundary=list(intercept.lower=0.95,intercept.upper=1.05,h2.upper=0.95)
 }
 t0 = Sys.time() - t0
-print("Processing data -> ")
+cat("Processing data -> ")
 print(t0)
 
 ############################# initial estimator ####################################
@@ -64,7 +64,7 @@ h2.ini=beta[2]
 intercept.ini=beta[1]
 
 t1=Sys.time()-t1
-print("Initial Heritability Estimate -> ")
+cat("Initial Heritability Estimate -> ")
 print(t1)
 
 ############################ reweighting for efficiency ##################################
@@ -86,7 +86,7 @@ beta=result$solution
 h2=beta[2]
 intercept=beta[1]
 t2=Sys.time()-t2
-print("Heritability Estimation -> ")
+cat("Heritability Estimation -> ")
 print(t2)
 
 ########################### resampling for standard error ############################
@@ -116,7 +116,7 @@ h2.vec[i]=beta[2]
 intercept.vec[i]=beta[1]
 }
 t3=Sys.time()-t3
-print("Standard Error Estimation\n")
+cat("Standard Error Estimation\n")
 print(t3)
 intercept.se=sqrt(mean((intercept.vec-intercept)^2))
 h2.se=sqrt(mean((h2.vec-h2)^2))
