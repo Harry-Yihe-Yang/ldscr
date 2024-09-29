@@ -57,7 +57,7 @@ XtX=matrixMultiply(t(X),X)
 Xty=matrixVectorMultiply(t(X),z)
 theta=c(solve(XtX)%*%Xty)
 t1=Sys.time()-t1
-print("Initial Covariance Estimate -> ")
+cat("Initial Covariance Estimate -> ")
 print(t1)
 
 ############################ reweighting for efficiency ##################################
@@ -72,7 +72,7 @@ XtX=matrixMultiply(t(X),X*w)
 Xty=matrixVectorMultiply(t(X),z*w)
 theta=c(solve(XtX)%*%Xty)
 t2=Sys.time()-t2
-print("Genetic Covariance Estimation -> ")
+cat("Genetic Covariance Estimation -> ")
 print(t2)
 
 ########################### resampling for standard error ############################
@@ -97,7 +97,7 @@ h2.vec[i]=theta1[2]
 intercept.vec[i]=theta1[1]
 }
 t3=Sys.time()-t3
-print("Standard Error Estimation\n")
+cat("Standard Error Estimation\n")
 print(t3)
 ecov.se=sqrt(mean((intercept.vec-theta[1])^2))
 gcov.se=sqrt(mean((h2.vec-theta[2])^2))
