@@ -44,7 +44,7 @@ gwas1 <- gwas1[order(gwas1$Order), ]
 gwas2 <- gwas2[order(gwas2$Order), ]
 M=nrow(gwas1)
 t0 = Sys.time() - t0
-print("Processing data")
+cat("Processing data -> ")
 print(t0)
 
 ############################# initial estimator ####################################
@@ -57,7 +57,7 @@ XtX=matrixMultiply(t(X),X)
 Xty=matrixVectorMultiply(t(X),z)
 theta=c(solve(XtX)%*%Xty)
 t1=Sys.time()-t1
-print("Initial Genetic Covariance Estimate")
+print("Initial Covariance Estimate -> ")
 print(t1)
 
 ############################ reweighting for efficiency ##################################
@@ -72,7 +72,7 @@ XtX=matrixMultiply(t(X),X*w)
 Xty=matrixVectorMultiply(t(X),z*w)
 theta=c(solve(XtX)%*%Xty)
 t2=Sys.time()-t2
-print("Genetic Covariance Estimation")
+print("Genetic Covariance Estimation -> ")
 print(t2)
 
 ########################### resampling for standard error ############################
@@ -97,7 +97,7 @@ h2.vec[i]=theta1[2]
 intercept.vec[i]=theta1[1]
 }
 t3=Sys.time()-t3
-print("Standard Error Estimation")
+print("Standard Error Estimation\n")
 print(t3)
 ecov.se=sqrt(mean((intercept.vec-theta[1])^2))
 gcov.se=sqrt(mean((h2.vec-theta[2])^2))
