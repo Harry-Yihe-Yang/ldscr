@@ -68,7 +68,7 @@ if(Boundary[1]==F){
 Boundary=list(intercept.lower=0.95,intercept.upper=1.05,h2.upper=0.95)
 }
 t0 = Sys.time() - t0
-print("Processing data")
+cat("Processing data -> ")
 print(t0)
 
 ############################# initial estimator ####################################
@@ -110,7 +110,7 @@ ECovEst1[i,j]=ECovEst1[j,i]=beta[1]
 }
 }
 t1=Sys.time()-t1
-print("Initial Genetic Covariance Estimate")
+cat("Initial Genetic Covariance Estimate -> ")
 print(t1)
 
 ############################ reweight for efficiency ##################################
@@ -155,7 +155,7 @@ ECovEst[i,j]=ECovEst[j,i]=beta[1]
 }
 }
 t2=Sys.time()-t2
-print("Final Genetic Covariance Estimate")
+cat("Final Genetic Covariance Estimate -> ")
 print(t2)
 
 
@@ -222,7 +222,7 @@ ECovSE[i,j]=ECovSE[j,i]=sd(ECovEstt[,i,j])
 }
 }
 t3=Sys.time()-t3
-print("Resampling for Standard Error")
+cat("Resampling for Standard Error\n")
 print(t3)
 }else{
 GCovSE=ECovSE=0*diag(p)
