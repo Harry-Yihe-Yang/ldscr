@@ -72,7 +72,7 @@ XtX=matrixMultiply(t(X),X*w)
 Xty=matrixVectorMultiply(t(X),z*w)
 theta=c(solve(XtX)%*%Xty)
 t2=Sys.time()-t2
-print("Heritability Estimation")
+print("Genetic Covariance Estimation")
 print(t2)
 
 ########################### resampling for standard error ############################
