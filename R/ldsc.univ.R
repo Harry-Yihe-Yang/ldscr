@@ -116,7 +116,7 @@ h2.vec[i]=beta[2]
 intercept.vec[i]=beta[1]
 }
 t3=Sys.time()-t3
-cat("Standard Error Estimation\n")
+cat("Standard Error Estimation -> ")
 print(t3)
 intercept.se=sqrt(mean((intercept.vec-intercept)^2))
 h2.se=sqrt(mean((h2.vec-h2)^2))
