@@ -97,7 +97,7 @@ h2.vec[i]=theta1[2]
 intercept.vec[i]=theta1[1]
 }
 t3=Sys.time()-t3
-cat("Standard Error Estimation\n")
+cat("Standard Error Estimation -> ")
 print(t3)
 ecov.se=sqrt(mean((intercept.vec-theta[1])^2))
 gcov.se=sqrt(mean((h2.vec-theta[2])^2))
