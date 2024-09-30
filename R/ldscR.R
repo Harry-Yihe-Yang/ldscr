@@ -222,7 +222,7 @@ ECovSE[i,j]=ECovSE[j,i]=sd(ECovEstt[,i,j])
 }
 }
 t3=Sys.time()-t3
-cat("Resampling for Standard Error\n")
+cat("Resampling for Standard Error -> ")
 print(t3)
 }else{
 GCovSE=ECovSE=0*diag(p)
