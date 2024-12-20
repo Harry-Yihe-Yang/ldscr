@@ -10,8 +10,8 @@ ldsc.bicov(
   h1,
   h2,
   LDSC,
-  zsquare_thresh = 500,
-  nblock = 200,
+  zsquare_thresh = 50000,
+  nblock = 500,
   sampling.time = 200,
   sampling.ratio = 0.5
 )

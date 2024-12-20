@@ -8,11 +8,11 @@ ldscR(
   GWAS_List,
   LDSC,
   Boundary = F,
-  zsquare_thresh = 500,
-  cov_thresh = 300,
+  zsquare_thresh = 50000,
+  cov_thresh = 10000,
   estimate_SE = F,
-  nblock = 200,
-  sampling.time = 200,
+  nblock = 500,
+  sampling.time = 500,
   sampling.ratio = 0.5
 )
 }
@@ -31,11 +31,9 @@ ldscR(
 
 \item{nblock}{The number of blocks for bootstrap-based standard error estimation. Default to 200.}
 
+\item{sampling.time}{time for the estimation of standard errors. Default to 200.}
+
 \item{sampling.ratio}{The sub-sampling ratio in each bootstrap. Default to 0.5.}
-
-\item{min.eps}{A lower boundary of the eigenvalues in genetic correlation matrix estimate and estimation error correlation matrix estimate.}
-
-\item{Resampling}{time for the estimation of standard errors. Default to 200.}
 }
 \value{
 A list containing the following elements:

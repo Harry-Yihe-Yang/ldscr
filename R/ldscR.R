@@ -7,10 +7,9 @@
 #' @param Boundary A list of the information of upper and lower boundaries of parameter estimates. It typically includes intercept.lower (he lower boundary of the intercept estimate), intercept.upper (the upper boundary of the intercept estimate), h2.upper (the upper boundary of the heritability estimate).
 #' @param zsquare_thresh Threshold on the z-score square in heritability estimation.
 #' @param cov_thresh Threshold on the abs(z-score1 * z-score2) in genetic covariance estimation.
-#' @param min.eps  A lower boundary of the eigenvalues in genetic correlation matrix estimate and estimation error correlation matrix estimate.
 #' @param estimate_SE If estimating the standard error of the genetic covariance matrix and estimation error covariance matrix. Default to F.
 #' @param nblock The number of blocks for bootstrap-based standard error estimation. Default to 200.
-#' @param Resampling time for the estimation of standard errors. Default to 200.
+#' @param sampling.time time for the estimation of standard errors. Default to 200.
 #' @param sampling.ratio The sub-sampling ratio in each bootstrap. Default to 0.5.
 
 #' @return A list containing the following elements:
@@ -31,10 +30,11 @@
 #'
 #' @details The \code{ldscR} function is designed for advanced genetic statistics and requires a good understanding of GWAS summary statistics, LDSC methodology, and statistical genetics. Users should ensure that input data is correctly formatted and that they understand the implications of the estimates produced by the function.
 #'
-#' @importFrom stats lm
-#' @importFrom data.table setDT setkey copy setnames
+#' @importFrom stats lm cov2cor runif sd
+#' @import data.table
 #' @importFrom CppMatrix matrixMultiply matrixVectorMultiply
 #' @importFrom nloptr nloptr
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #' @export
 #'
@@ -171,8 +171,8 @@ upper_bounds <- c(Boundary$intercept.upper, Boundary$h2.upper)
 blocksize=floor(M/nblock)
 IndexMatrix=matrix(c(1:(nblock*blocksize)),blocksize,nblock)
 gap=M-(nblock*blocksize)
-GCovEstt=ECovEstt=array(0,c(sampling.time,p,p))
-GCovSE=ECovSE=diag(p)*0
+GCovEstt=ECovEstt=GCorEstt=array(0,c(sampling.time,p,p))
+GCovSE=ECovSE=GCorSE=diag(p)*0
 pb <- txtProgressBar(min = 0, max = sampling.time, style = 3)
 for(t in 1:sampling.time){
 setTxtProgressBar(pb, t)
@@ -213,12 +213,14 @@ GCovEstt[t,i,j]=GCovEstt[t,j,i]=beta[2]
 ECovEstt[t,i,j]=ECovEstt[t,j,i]=beta[1]
 }
 }
+GCorEstt[t,,]=cov2cor(GCovEstt[t,,])
 }
 close(pb)
 for(i in 1:p){
 for(j in i:p){
 GCovSE[i,j]=GCovSE[j,i]=sd(GCovEstt[,i,j])
 ECovSE[i,j]=ECovSE[j,i]=sd(ECovEstt[,i,j])
+GCorSE[i,j]=GCorSE[j,i]=sd(GCorEstt[,i,j])
 }
 }
 t3=Sys.time()-t3
@@ -228,11 +230,12 @@ print(t3)
 GCovSE=ECovSE=0*diag(p)
 t3=0
 }
-
-row.names(GCovEst)=colnames(GCovEst)=row.names(ECovEst)=colnames(ECovEst)=NAM
-row.names(GCovSE)=colnames(GCovSE)=row.names(ECovSE)=colnames(ECovSE)=NAM
+GCorEst=cov2cor(GCovEst)
+GCorEst[is.na(GCorEst)]=0
+row.names(GCovEst)=colnames(GCovEst)=row.names(GCorEst)=colnames(GCorEst)=row.names(ECovEst)=colnames(ECovEst)=NAM
+row.names(GCovSE)=colnames(GCovSE)=row.names(GCorSE)=colnames(GCorSE)=row.names(ECovSE)=colnames(ECovSE)=NAM
 row.names(GCovEst1)=colnames(GCovEst1)=row.names(ECovEst1)=colnames(ECovEst1)=NAM
 Computing.time=list(data_organization=t0,initial_estimation=t1,reweighting_estimation=t2,resampling_estimation=t3)
-return(A=list(GCovEst=GCovEst,GCovSE=GCovSE,ECovEst=ECovEst,ECovSE=ECovSE,Computing.time=Computing.time))
+return(A=list(GCovEst=GCovEst,GCovSE=GCovSE,GCorEst=GCorEst,GCorSE=GCorSE,ECovEst=ECovEst,ECovSE=ECovSE,Computing.time=Computing.time))
 }
 

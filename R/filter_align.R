@@ -4,17 +4,12 @@
 #'
 #' @param gwas_data_list A list of data.frames where each data.frame contains GWAS summary statistics for a trait. Each data.frame should include columns for SNP identifiers, Z-scores of effect size estimates, sample sizes (N), effect allele (A1), and reference allele (A2).
 #' @param ref_panel A data.frame containing the reference panel data. It must include columns for SNP, A1, and A2.
-#'
+#' @param allele_match An indicator of whether performing allele harmonization. Default to T.
+
 #' @return A list of data.frames, each corresponding to an input GWAS summary statistics data frame, but filtered, harmonized, and aligned to the common SNPs found across all data frames.
 #'
-#' @examples
-#' # Assuming GWAS_List and ref_panel are already defined:
-#' GWAS_List <- filter_align(GWAS_List=list(GWAS1=GWAS1[,c('SNP','A1','A2','Zscore','N')],
-#'                                             GWAS2=GWAS2[,c('SNP','A1','A2','Zscore','N')]),
-#'                                             ref_panel=hapmap3, allele_match=T)
-#'
 #' @details The function performs several key steps: adjusting alleles according to a reference panel, removing duplicate SNPs, and aligning all GWAS data frames to a set of common SNPs. This is often a necessary preprocessing step before performing genetic correlation and heritability analyses.
-#' @importFrom data.table setDT
+#' @import data.table
 #' @export
 
 filter_align <- function(gwas_data_list, ref_panel, allele_match=T) {

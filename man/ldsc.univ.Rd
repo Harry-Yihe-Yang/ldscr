@@ -8,9 +8,9 @@ ldsc.univ(
   gwas,
   LDSC,
   Boundary = F,
-  zsquare_thresh = 500,
-  nblock = 200,
-  sampling.time = 200,
+  zsquare_thresh = 50000,
+  nblock = 500,
+  sampling.time = 500,
   sampling.ratio = 0.5
 )
 }
